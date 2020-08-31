@@ -32,6 +32,9 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 ENV ANDROID_COMPONENTS platform-tools,build-tools-23.0.2,build-tools-23.0.3,android-23,android-19
 RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}"
 
+# Install old annotations to work with gradle
+COPY annotations.zip /opt/android-sdk-linux/platform-tools/api/annotations.zip
+
 RUN chown -R root: ${ANDROID_HOME} && chmod 777 -R ${ANDROID_HOME}
 
 RUN which adb
